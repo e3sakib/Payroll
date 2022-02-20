@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <u>
+                <h1 class="row justify-content-center"> Add Product</h1>
+            </u>
+            <div class="form mt-5">
+                <form (ngSubmit)='isSave? addProduct():updateProduct()'>
+                    <div class="form-group mt-3">
+                        Name :
+                        <input class="form-control" type="text" id="name" name="name" placeholder="Type Product Name"
+                     [(ngModel)]="product.name"    >
+                    </div>
+                    <div class="form-group mt-3">
+                        Quantity:
+                        <input class="form-control" type="number" id="quantity" name="quantity"
+                            placeholder="Enter Product Quantity" [(ngModel)]="product.quantity"    >
+                    </div>
+                    <div class="form-group mt-3">
+                       Price :
+                        <input class="form-control" type="number" id="price" name="price"
+                            placeholder="Enter Product Price" [(ngModel)]="product.price">
+                    </div>
+                    <div class="form-group mt-3">
+                        Remarks :
+                        <textarea class="form-control" name="remarks" id="remarks" [(ngModel)]="product.remarks"
+                            ></textarea>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-success float-end mt-4" type="submit" >{{isSave? 'Add Product' : 'Update'}}</button>
+                        <button class="btn btn-danger mt-4" type="reset" (click)="resetForm()">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="table mt-3">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Remarks</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pro of products; index as i;">
+                        <td>{{i+1}}</td>
+                        <td>{{pro.name}}</td>
+                        <td>{{pro.quantity}}</td>
+                        <td>{{pro.price}}</td>
+                        <td>{{pro.remarks}}</td>
+                        <td>
+                            <button class="btn btn-primary" (click)="editProduct(i)">Edit</button>
+                            ||
+                            <button class=" btn btn-danger" (click)="deleteProduct(i)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

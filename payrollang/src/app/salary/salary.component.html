@@ -1,0 +1,48 @@
+<div class="content-wrapper">
+    <div class="bg" style="height:700px;">
+      <div class="container">
+        <div class="table mt-3">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Employee name</th>
+                        <th>Employee Phone</th>
+                        <th>Designation</th>
+                        <th>Basic</th>
+                        <th>Allowance</th>
+                        <th>Deduction</th>
+                        <th>Net Salary</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+             
+                    <tr *ngFor="let salfm of Salaryforms; index as i;">
+                        <td>{{salfm.id}}</td>
+                        <td>{{salfm.name}}</td>
+                        <td>{{salfm.phone}}</td>
+                        <td>{{salfm.designation}}</td>
+                        <td>{{salfm.basic}}</td>
+                        <td>{{salfm.allowance}}</td>
+                        <td>{{salfm.deduction}}</td>
+                        <td>{{salfm.netSalary}}</td>
+                        
+                        <!-- <td>
+                            <button class="btn btn-primary" (click)="editEmployee()">Edit</button>
+                            ||
+                            <button class=" btn btn-danger" (click)="deleteEmployee()">Delete</button>
+                        </td> -->
+                        <a href="payslip"> Details</a>
+                    </tr>
+                </tbody>
+        
+            </table>
+        </div>
+        
+       
+      </div>
+  
+    </div>
+  </div>
+

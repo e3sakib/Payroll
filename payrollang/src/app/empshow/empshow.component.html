@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+    <div class="bg" style="height:700px;">
+      <div class="container">
+        <div class="table mt-3">
+            <table class="table table-light table-responsive">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Employee name</th>
+                        <th>Employee Phone</th>
+                        <!-- <th>Employee Salary</th> -->
+                        <th>Employee Address</th>
+                        <th>Employee Birthdate</th>
+                        <th>Employee Joiningdate</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emp of Employees; index as i;">
+                        <td>{{emp.id}}</td>
+                        <td>{{emp.name}}</td>
+                        <td>{{emp.phone}}</td>
+                        <!-- <td>{{emp.salary}}</td> -->
+                        <td>{{emp.address}}</td>
+                        <td>{{emp.dob}}</td>
+                        <td>{{emp.doj}}</td>
+                        <td>
+                            <button class="btn btn-primary" (click)="editEmployee(emp)">Edit</button>
+                            ||
+                            <button class=" btn btn-danger" (click)="deleteEmployee()">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+        
+            </table>
+        </div>
+        
+       
+      </div>
+  
+    </div>
+  </div>
+

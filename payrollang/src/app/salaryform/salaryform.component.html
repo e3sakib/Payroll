@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <u>
+                <h1 class="row justify-content-center">Employees Salary Information</h1>
+            </u>
+            <div class="form mt-5">
+                <form (ngSubmit)='addSalaryform()'>
+                    <div class="form-group mt-3">
+                        Name :
+                        <input class="form-control" type="text" id="name" name="name" placeholder="Type Employee Name"
+                     [(ngModel)]="salaryform.name"    >
+                    </div>
+                    <div class="form-group mt-3">
+                        Phone :
+                        <input class="form-control" type="text" id="phone" name="phone"
+                            placeholder="Enter Employee Phone text" [(ngModel)]="salaryform.phone"    >
+                    </div>
+                    <div class="form-group mt-3">
+                        Designation :
+                        <input class="form-control" type="text" id="designation" name="designation"
+                            placeholder="Enter designation" [(ngModel)]="salaryform.designation">
+                    </div>
+                    <!-- <div class="form-group mt-3">
+                        Address :
+                        <textarea class="form-control" name="address" id="address" [(ngModel)]="employee.address"
+                            ></textarea>
+                    </div> -->
+                    <div class="form-group mt-3">
+                        Basic :
+                        <input class="form-control" type="text" id="basic" name="basic"
+                            placeholder="Enter Salary" [(ngModel)]="salaryform.basic">
+                    </div>
+                    <div class="form-group mt-3">
+                        Allowance :
+                        <input class="form-control" type="text" id="allowance" name="allowance"
+                            placeholder="Enter allowance" [(ngModel)]="salaryform.allowance">
+                    </div>
+                    <div class="form-group mt-3">
+                        Deduction :
+                        <input class="form-control" type="text" id="deduction" name="deduction"
+                            placeholder="Enter deduction" [(ngModel)]="salaryform.deduction">
+                    </div>
+                    
+
+                    <div>
+                        <button class="btn btn-success float-end mt-4" type="submit" >{{isSave? 'Add ' : 'Update'}}</button>
+                        <button class="btn btn-danger mt-4" type="reset" (click)="resetForm()">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

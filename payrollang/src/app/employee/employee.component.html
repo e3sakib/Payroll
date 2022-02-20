@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <u>
+                <h1 class="row justify-content-center"> Add Employee</h1>
+            </u>
+            <div class="form mt-5">
+                <form (ngSubmit)='isSave? addEmployee():updateEmployee()'>
+                    <div class="form-group mt-3">
+                        Name :
+                        <input class="form-control" type="text" id="name" name="name" placeholder="Type Employee Name"
+                     [(ngModel)]="employee.name"    >
+                    </div>
+                    <div class="form-group mt-3">
+                        Phone :
+                        <input class="form-control" type="number" id="phone" name="phone"
+                            placeholder="Enter Employee Phone Number" [(ngModel)]="employee.phone"    >
+                    </div>
+                    <!-- <div class="form-group mt-3">
+                        Salary :
+                        <input class="form-control" type="number" id="salary" name="salary"
+                            placeholder="Enter Salary" [(ngModel)]="employee.salary">
+                    </div> -->
+                    <div class="form-group mt-3">
+                        Address :
+                        <textarea class="form-control" name="address" id="address" [(ngModel)]="employee.address"
+                            ></textarea>
+                    </div>
+                    <div class="form-group mt-3">
+                        Date of Birth:
+                        <input class="form-control" type="date" id="dob" name="dob"
+                            placeholder="" [(ngModel)]="employee.dob">
+                    </div>
+                    <div class="form-group mt-3">
+                        Date of Joining:
+                        <input class="form-control" type="date" id="doj" name="doj"
+                            placeholder="" [(ngModel)]="employee.doj">
+                    </div>
+
+                    <div>
+                        <button class="btn btn-success float-end mt-4" type="submit" >{{isSave? 'Add Employee' : 'Update'}}</button>
+                        <button class="btn btn-danger mt-4" type="reset" (click)="resetForm()">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- <div class="table mt-3">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Employee name</th>
+                        <th>Employee Phone</th>
+                        <th>Employee Salary</th>
+                        <th>Employee Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emp of employees; index as i;">
+                        <td>{{i+1}}</td>
+                        <td>{{emp.name}}</td>
+                        <td>{{emp.phone}}</td>
+                        <td>{{emp.salary}}</td>
+                        <td>{{emp.address}}</td>
+                        <td>
+                            <button class="btn btn-primary" (click)="editEmployee(i)">Edit</button>
+                            ||
+                            <button class=" btn btn-danger" (click)="deleteEmployee(i)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div> -->
+    </div>
+</div>
