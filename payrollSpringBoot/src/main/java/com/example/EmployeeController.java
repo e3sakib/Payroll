@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.example;
+
 
 import com.example.interfaceService.EmployeeService;
 
 import com.example.model.Employee;
-
+import com.example.storagefile.FileStorageService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,18 +16,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class EmployeeController {
       @Autowired
       private EmployeeService employeeservice;
-  	
+      @Autowired
+  	private FileStorageService fileStorageService;
+      
 
     @PostMapping(value = "/employee/save")
    	
@@ -48,6 +51,37 @@ public class EmployeeController {
 			map.put("Status code", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
+	}
+    
+    @PostMapping("/saveemployee_withfile")
+	public ResponseEntity<Map> saveFormData(@ModelAttribute Employee addEmployee,
+			@RequestParam("file") MultipartFile file) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+
+			String fileName = fileStorageService.storeFile(file);
+
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
+					.path(fileName).toUriString();
+			addEmployee.setImages(fileName);
+			addEmployee.setImagesUri(fileDownloadUri);
+
+//			UserModel user = userService.findById(userId).get();
+//			advertisingForm.setUser(user);
+
+			addEmployee = employeeservice.save(addEmployee);
+			map.put("status", "Success");
+			map.put("data", addEmployee);
+			map.put("message", "Data saved successfully");
+			return ResponseEntity.ok(map);
+
+		} catch (Exception e) {
+			map.put("status", "failed");
+			map.put("data", null);
+			map.put("message", e.getLocalizedMessage());
+			return ResponseEntity.status(500).body(map);
+		}
+
 	}
 	
     
@@ -100,7 +134,7 @@ public class EmployeeController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
-    
+      
     @GetMapping(value = "/employee/delete/{id}")
     
     public ResponseEntity<?> delete(@PathVariable(value = "id") long id) {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Signup } from './signup.model';
 
@@ -13,9 +14,18 @@ export class SignupComponent implements OnInit {
   signups: Signup[] = [];
   isSave: boolean = true
   empIndex: number = -1
-
-  constructor(private http: HttpClient, private router:Router) { }
-
+  fileToUpload: any;
+  
+  //submitted: false;
+  formGroup: FormGroup ;
+  constructor(private http: HttpClient, private fb: FormBuilder, private router:Router) { 
+    this.formGroup= this.fb.group({
+      email: ['', [Validators.required]],
+    })
+  }
+  get f() {
+    return this.formGroup.controls;
+  }
   ngOnInit(): void {
   }
   onSubmit() {
@@ -28,6 +38,38 @@ export class SignupComponent implements OnInit {
       this.signups = signups;
     }
     )
+  }
+
+   fileChange(files: any) {
+    debugger;
+    this.fileToUpload = files.files[0]
+  }
+  save(){
+    //this.submitted = true;
+
+    // debugger;
+    const formData: FormData = new FormData();
+    // formData.append('id', this.ep['id'].toString());
+    
+    // formData.append('name',this.signup['name']);
+    // formData.append('email',this.signup['email']);
+    // formData.append('designation',this.signup."designation");
+  
+    formData.append('file', this.fileToUpload, this.fileToUpload?.name);
+   
+
+    
+    this.http.post("http://localhost:8081/saveemployee_withfile", formData)
+    .subscribe(res => {
+      console.log(res);
+     
+     
+    }, err => {
+      console.log("error");
+      
+    })
+
+
   }
 
   addUser() {

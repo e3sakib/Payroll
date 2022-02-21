@@ -9,6 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Employees")
@@ -28,9 +33,38 @@ public class Employee {
     private String dob;
     private String doj;
     
-    
+    @Transient
+	@JsonIgnore
+	MultipartFile file;
+	
+	String images;
+	String imagesUri;
 
-    public String getDob() {
+    public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
+	}
+
+	public String getImagesUri() {
+		return imagesUri;
+	}
+
+	public void setImagesUri(String imagesUri) {
+		this.imagesUri = imagesUri;
+	}
+
+	public String getDob() {
 		return dob;
 	}
 

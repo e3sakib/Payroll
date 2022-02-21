@@ -5,6 +5,7 @@ export class Signup{
     password: String = '';
     email: String = '';
     remarks: String = '';
-
+   
+    
    
 }

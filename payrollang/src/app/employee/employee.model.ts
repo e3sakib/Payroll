@@ -6,6 +6,6 @@ export class Employee{
     address: string = '';
     dob:string  = '';
     doj: string = '';
-
+    file: string = '';
     constructor(){}
 }
