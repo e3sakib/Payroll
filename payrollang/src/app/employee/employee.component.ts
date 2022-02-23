@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Signup } from '../components/signup/signup.model';
 import { Employee } from './employee.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -16,7 +17,7 @@ export class EmployeeComponent implements OnInit {
   empIndex:number= -1
   signup: Signup = new Signup();formGroup: FormGroup;
   fileToUpload: any;
-  constructor(private http:HttpClient, private fb: FormBuilder) { 
+  constructor(private http:HttpClient, private fb: FormBuilder,private route: Router) { 
     this.formGroup= this.fb.group({
       email: ['', [Validators.required]],
     })
@@ -77,13 +78,14 @@ export class EmployeeComponent implements OnInit {
   updateEmployee(){
     
     const headers = { 'content-type': 'application/json' };
-    this.http.post<any>("http://localhost:9988/category/update", JSON.stringify(this.employee), { headers: headers })
+    this.http.post<any>("http://localhost:8081/employee/update", JSON.stringify(this.employee), { headers: headers })
       .subscribe(data => {
         this.employee= new Employee();
         alert("Employee Updated Successfully")
         this.isSave = true
       }
       )
+      this.route.navigate(['/empshow']);
   }
   deleteEmployee(i: number) {
     this.employees = this.employees.filter((p, index) => i != index)

@@ -10,8 +10,9 @@
                         <th>Employee Phone</th>
                         <!-- <th>Employee Salary</th> -->
                         <th>Employee Address</th>
-                        <th>Employee Birthdate</th>
-                        <th>Employee Joiningdate</th>
+                        <th> Birthdate</th>
+                        <th>Joiningdate</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                         <td>{{emp.address}}</td>
                         <td>{{emp.dob}}</td>
                         <td>{{emp.doj}}</td>
+                        <td>{{emp.file}}</td>
                         <td>
                             <button class="btn btn-primary" (click)="editEmployee(emp)">Edit</button>
                             ||
