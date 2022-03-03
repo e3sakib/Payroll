@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Instructor
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*")//"http://localhost:4200", maxAge = 3600)
 public class LoginController {
 
     @Autowired
-    private LoginService loginService;
+    private LoginService  loginService;
     @GetMapping("/")
 	public String index() {
 		return "Hello World";
@@ -54,4 +54,24 @@ public class LoginController {
         map.put("data", null);
         return ResponseEntity.status(412).body(map);
     }
+    
+    
+    @PostMapping(value = "/signin")
+    public ResponseEntity<Map<String, Object>> signin(@RequestBody UserModel umodel) {
+   	 List<UserModel> users = (List<UserModel>) loginService.findAll();
+       Map<String, Object> map = new HashMap<String, Object>();
+       for (UserModel other : users) {
+           if (other.getEmail().equals(umodel.getEmail()) &&  other.getPassword().equals(umodel.getPassword())) {
+           	map.put("message", "Login Successful");
+           	  map.put("status", "Success");
+           	  map.put("data", other);
+           	  return ResponseEntity.ok(map);            	
+           }
+       }
+
+       map.put("message", "Login fail!");
+       map.put("status", "Failed");
+       map.put("data", null);
+       return ResponseEntity.status(412).body(map);
+   }
 }
